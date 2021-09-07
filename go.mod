@@ -2,10 +2,8 @@ module github.com/cueblox/bloximages
 
 go 1.17
 
-replace github.com/cueblox/blox => /home/bjk/src/github.com/cueblox/blox
-
 require (
-	github.com/cueblox/blox v0.0.0-00010101000000-000000000000
+	github.com/cueblox/blox v0.7.0
 	github.com/disintegration/imaging v1.6.2
 	github.com/goccy/go-yaml v1.9.2
 	github.com/h2non/filetype v1.1.1
