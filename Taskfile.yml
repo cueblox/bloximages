@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  build:
+    desc: build the project
+    cmds:
+      - go build -v main.go
+
+  install:
+    desc: install the binary 
+    deps: [build]
+    cmds:
+      - go install
