@@ -1,6 +1,6 @@
 module github.com/cueblox/bloximages
 
-go 1.17
+go 1.16
 
 require (
 	github.com/cueblox/blox v0.7.0
