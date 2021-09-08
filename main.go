@@ -45,7 +45,6 @@ func (g *ImageScanner) Process(bloxConfig string) error {
 }
 
 func (g *ImageScanner) processImages(staticDir string) error {
-
 	g.logger.Debug("processing images", "dir", staticDir)
 	fi, err := os.Stat(staticDir)
 	if errors.Is(err, os.ErrNotExist) {
@@ -144,11 +143,6 @@ func (g *ImageScanner) processImages(staticDir string) error {
 	return err
 }
 
-func (g *ImageScanner) imageArray(path string) error {
-
-	return nil
-}
-
 type BloxImage struct {
 	FileName string `yaml:"file_name"`
 	Height   int    `yaml:"height"`
@@ -167,7 +161,7 @@ func main() {
 		logger: logger,
 	}
 	// pluginMap is the map of plugins we can dispense.
-	var pluginMap = map[string]plugin.Plugin{
+	pluginMap := map[string]plugin.Plugin{
 		"bloximages": &plugins.PrebuildPlugin{Impl: imageScanner},
 	}
 
