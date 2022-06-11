@@ -64,6 +64,11 @@ func (g *ImageScanner) processImages(staticDir string) error {
 	if !fi.IsDir() {
 		return errors.New("given images directory is not a directory")
 	}
+	dataDir, err := g.cfg.GetString("data_dir")
+	if err != nil {
+		g.logger.Info("no data directory in config")
+		return err
+	}
 	err = filepath.Walk(imagesDirectory,
 		func(path string, info os.FileInfo, err error) error {
 			if err != nil {
@@ -106,12 +111,12 @@ func (g *ImageScanner) processImages(staticDir string) error {
 						Height:   src.Bounds().Dy(),
 						Width:    src.Bounds().Dx(),
 						CDN:      cdnEndpoint,
+						FullPath: "/" + staticDir + "/" + relpath,
 					}
 					bytes, err := yaml.Marshal(bi)
 					if err != nil {
 						return err
 					}
-					dataDir := "data"
 
 					ext := strings.TrimPrefix(filepath.Ext(relpath), ".")
 					slug := strings.TrimSuffix(relpath, "."+ext)
@@ -148,6 +153,7 @@ type BloxImage struct {
 	Height   int    `yaml:"height"`
 	Width    int    `yaml:"width"`
 	CDN      string `yaml:"cdn"`
+	FullPath string `yaml:"full_path"`
 }
 
 func main() {
